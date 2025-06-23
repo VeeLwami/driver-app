@@ -1,13 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>BAC Input</title>
+  <title>BAC Input Simulation</title>
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <h1>🍷 Enter Your BAC</h1>
-  <input type="number" id="bac" placeholder="Enter your BAC (e.g. 0.03)" step="0.001">
-  <button onclick="submitBAC()">Submit</button>
+  <h1>🍷 Simulated BAC Test</h1>
+  <p style="text-align:center">Click a button to simulate a BAC reading from a breathalyzer device.</p>
+  <div style="text-align:center">
+    <button onclick="simulateBAC('safe')">Simulate Safe BAC</button>
+    <button onclick="simulateBAC('drunk')">Simulate Drunk BAC</button>
+    <p id="result"></p>
+  </div>
   <script src="js/bac.js"></script>
 </body>
 </html>
