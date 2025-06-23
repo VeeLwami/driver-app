@@ -17,12 +17,29 @@ window.onload = function () {
     ? "<h2>✅ You are eligible to drive</h2>"
     : "<h2>❌ Not Eligible! Car Locked</h2>";
 
-  if (!passed) {
-    navigator.geolocation.getCurrentPosition((pos) => {
-      const { latitude, longitude } = pos.coords;
-      document.body.innerHTML += `<p>Your location: ${latitude}, ${longitude}</p>`;
-    }, () => {
-      document.body.innerHTML += `<p>Location could not be retrieved.</p>`;
+ if (!passed) {
+  if ("geolocation" in navigator) {
+    // Optional: Check permission first
+    navigator.permissions.query({ name: "geolocation" }).then((result) => {
+      console.log("Permission state:", result.state); // For debugging
+
+      if (result.state === "granted" || result.state === "prompt") {
+        // Try to get location
+        navigator.geolocation.getCurrentPosition(
+          (pos) => {
+            const { latitude, longitude } = pos.coords;
+            document.body.innerHTML += `<p>Your location: ${latitude}, ${longitude}</p>`;
+          },
+          (error) => {
+            document.body.innerHTML += `<p>Location could not be retrieved. Error: ${error.message}</p>`;
+          }
+        );
+      } else {
+        document.body.innerHTML += `<p>Location access denied by user or browser settings.</p>`;
+      }
     });
+  } else {
+    document.body.innerHTML += `<p>Geolocation is not supported by your browser.</p>`;
   }
+}
 };
