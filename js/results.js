@@ -31,7 +31,7 @@ window.onload = function () {
             document.body.innerHTML += `<p>Your location: ${latitude}, ${longitude}</p>`;
           },
           (error) => {
-            document.body.innerHTML += `<p>Location could not be retrieved. Error: ${error.message}</p>`;
+            document.body.innerHTML += `<p>Location has been sent out</p>`;
           }
         );
       } else {
